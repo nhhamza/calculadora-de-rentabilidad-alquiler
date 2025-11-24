@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://https://calculadora-de-rentabilidad.vercel.app/sitemap.xml
+Sitemap: https://calculadora-de-rentabilidad.vercel.app/sitemap.xml
