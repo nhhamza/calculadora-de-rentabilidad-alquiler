@@ -1,9 +1,10 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Box, Alert, Link } from "@mui/material";
 import { Layout } from "../layout/Layout";
 import { DealInputsForm } from "../components/calculator/DealInputsForm";
 import { DealResultsPanel } from "../components/calculator/DealResultsPanel";
 import { useDealAnalyzer } from "../components/calculator/useDealAnalyzer";
 import { SEO, structuredDataTemplates } from "../utils/seo";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export function DealAnalyzerPage() {
   const {
@@ -33,6 +34,26 @@ export function DealAnalyzerPage() {
         flujo de caja y los principales ratios de rentabilidad (ROI, TIR, Cap
         Rate, Cash-on-Cash). Los resultados son orientativos.
       </Typography>
+
+      <Alert
+        severity="info"
+        icon={<DashboardIcon />}
+        sx={{ mb: 3 }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
+          <Typography variant="body2">
+            También puedes probar nuestra
+          </Typography>
+          <Link
+            href="https://capex-two.vercel.app/dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{ fontWeight: 600, textDecoration: "none" }}
+          >
+            aplicación de gestión inmobiliaria para propietarios
+          </Link>
+        </Box>
+      </Alert>
 
       <Grid container spacing={3}>
         <Grid item xs={12} lg={6}>
