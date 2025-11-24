@@ -20,9 +20,23 @@ interface DealInputsFormProps {
 export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormProps) {
   const handleChange =
     (field: keyof DealInputs) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = parseFloat(event.target.value);
-      onChange(field, value);
+      const rawValue = event.target.value;
+
+      // If empty or just whitespace, set to 0
+      if (!rawValue || rawValue.trim() === '') {
+        onChange(field, 0);
+        return;
+      }
+
+      // Parse the value and handle NaN
+      const value = parseFloat(rawValue);
+      if (!isNaN(value)) {
+        onChange(field, value);
+      }
     };
+
+  // Helper to display empty string for zero values
+  const displayValue = (value: number) => value === 0 ? '' : value;
 
   return (
     <Paper sx={{ p: 3 }}>
@@ -35,10 +49,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Precio de compra"
             type="number"
-            value={inputs.purchasePrice}
+            value={displayValue(inputs.purchasePrice)}
             onChange={handleChange("purchasePrice")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 1000
             }}
           />
         </Grid>
@@ -47,10 +65,15 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Entrada (%)"
             type="number"
-            value={inputs.downPaymentPercent}
+            value={displayValue(inputs.downPaymentPercent)}
             onChange={handleChange("downPaymentPercent")}
             InputProps={{
               endAdornment: <InputAdornment position="end">%</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              max: 100,
+              step: 1
             }}
           />
         </Grid>
@@ -60,10 +83,15 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
               fullWidth
               label="Interés anual"
               type="number"
-              value={inputs.interestRate}
+              value={displayValue(inputs.interestRate)}
               onChange={handleChange("interestRate")}
               InputProps={{
                 endAdornment: <InputAdornment position="end">%</InputAdornment>
+              }}
+              inputProps={{
+                min: 0,
+                max: 20,
+                step: 0.1
               }}
             />
             <InfoTooltip title="Tipo de interés nominal anual de la hipoteca." />
@@ -74,8 +102,13 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Plazo hipoteca (años)"
             type="number"
-            value={inputs.loanTerm}
+            value={displayValue(inputs.loanTerm)}
             onChange={handleChange("loanTerm")}
+            inputProps={{
+              min: 1,
+              max: 50,
+              step: 1
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -84,10 +117,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
               fullWidth
               label="Gastos de compra"
               type="number"
-              value={inputs.closingCosts}
+              value={displayValue(inputs.closingCosts)}
               onChange={handleChange("closingCosts")}
               InputProps={{
                 startAdornment: <InputAdornment position="start">€</InputAdornment>
+              }}
+              inputProps={{
+                min: 0,
+                step: 100
               }}
             />
             <InfoTooltip title="Impuestos, notaría, registro y otros gastos de compra." />
@@ -98,10 +135,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Reforma"
             type="number"
-            value={inputs.renovationCosts}
+            value={displayValue(inputs.renovationCosts)}
             onChange={handleChange("renovationCosts")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 100
             }}
           />
         </Grid>
@@ -116,10 +157,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Renta mensual"
             type="number"
-            value={inputs.monthlyRent}
+            value={displayValue(inputs.monthlyRent)}
             onChange={handleChange("monthlyRent")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 10
             }}
           />
         </Grid>
@@ -135,10 +180,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
               fullWidth
               label="IBI anual"
               type="number"
-              value={inputs.propertyTax}
+              value={displayValue(inputs.propertyTax)}
               onChange={handleChange("propertyTax")}
               InputProps={{
                 startAdornment: <InputAdornment position="start">€</InputAdornment>
+              }}
+              inputProps={{
+                min: 0,
+                step: 10
               }}
             />
             <InfoTooltip title="Impuesto sobre Bienes Inmuebles (IBI) anual." />
@@ -155,10 +204,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Seguro"
             type="number"
-            value={inputs.insurance}
+            value={displayValue(inputs.insurance)}
             onChange={handleChange("insurance")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 1
             }}
           />
         </Grid>
@@ -167,10 +220,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Comunidad"
             type="number"
-            value={inputs.hoa}
+            value={displayValue(inputs.hoa)}
             onChange={handleChange("hoa")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 1
             }}
           />
         </Grid>
@@ -179,10 +236,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Mantenimiento"
             type="number"
-            value={inputs.maintenance}
+            value={displayValue(inputs.maintenance)}
             onChange={handleChange("maintenance")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 1
             }}
           />
         </Grid>
@@ -192,10 +253,15 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
               fullWidth
               label="Gestión"
               type="number"
-              value={inputs.propertyManagement}
+              value={displayValue(inputs.propertyManagement)}
               onChange={handleChange("propertyManagement")}
               InputProps={{
                 endAdornment: <InputAdornment position="end">%</InputAdornment>
+              }}
+              inputProps={{
+                min: 0,
+                max: 100,
+                step: 0.5
               }}
             />
             <InfoTooltip title="Porcentaje que pagas a la agencia de gestión sobre la renta." />
@@ -206,10 +272,14 @@ export function DealInputsForm({ inputs, onChange, onSubmit }: DealInputsFormPro
             fullWidth
             label="Suministros"
             type="number"
-            value={inputs.utilities}
+            value={displayValue(inputs.utilities)}
             onChange={handleChange("utilities")}
             InputProps={{
               startAdornment: <InputAdornment position="start">€</InputAdornment>
+            }}
+            inputProps={{
+              min: 0,
+              step: 1
             }}
           />
         </Grid>
