@@ -5,8 +5,8 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Helmet } from "react-helmet-async";
 import { Layout } from "../layout/Layout";
+import { SEO, structuredDataTemplates } from "../utils/seo";
 
 const faqs = [
   {
@@ -29,28 +29,41 @@ const faqs = [
     q: "¿Qué es el Cash-on-Cash?",
     a: "Es la relación entre el beneficio anual en efectivo (cash flow) y el capital que has aportado. Permite comparar inversiones con distinto nivel de apalancamiento.",
   },
+  {
+    q: "¿Es gratis la calculadora de rentabilidad?",
+    a: "Sí, nuestra calculadora de rentabilidad de alquiler es 100% gratuita. No necesitas registrarte ni pagar para usarla. Todos los cálculos y resultados son completamente gratis.",
+  },
+  {
+    q: "¿Cómo usar la calculadora de rentabilidad alquiler gratuita?",
+    a: "Es muy sencillo: introduce el precio de compra del inmueble, los datos de tu hipoteca (si la hay), la renta mensual esperada y los gastos asociados. La calculadora te mostrará automáticamente el cash flow, ROI, TIR y otros indicadores clave.",
+  },
 ];
 
 export function FaqPage() {
+  const faqStructuredData = structuredDataTemplates.faqPage(
+    faqs.map((faq) => ({
+      question: faq.q,
+      answer: faq.a,
+    }))
+  );
+
   return (
     <Layout>
-      <Helmet>
-        <title>
-          Preguntas frecuentes sobre rentabilidad de inmuebles | Rentabilidad
-          inmueble
-        </title>
-        <meta
-          name="description"
-          content="Preguntas frecuentes sobre cómo calcular la rentabilidad de un inmueble en alquiler, gastos a tener en cuenta, tipos de interés, rentabilidad bruta y neta."
-        />
-      </Helmet>
+      <SEO
+        title="Preguntas Frecuentes - Calculadora Rentabilidad Alquiler"
+        description="Preguntas frecuentes sobre cómo calcular la rentabilidad de un inmueble en alquiler en España. Resuelve tus dudas sobre gastos, hipoteca, cash flow, ROI y más con nuestra calculadora gratuita."
+        keywords="calculadora rentabilidad preguntas, como calcular rentabilidad alquiler, gastos inmueble alquiler, rentabilidad neta bruta diferencia, cash on cash, calculadora gratuita alquiler"
+        canonical="https://calculadora-de-rentabilidad.vercel.app/preguntas-frecuentes-rentabilidad-inmuebles"
+        structuredData={faqStructuredData}
+      />
 
-      <Typography variant="h4" gutterBottom>
-        Preguntas frecuentes
+      <Typography variant="h1" sx={{ fontSize: "1.75rem" }} gutterBottom>
+        Preguntas Frecuentes sobre Rentabilidad de Alquiler
       </Typography>
       <Typography variant="body1" color="text.secondary" paragraph>
-        Resolvemos algunas de las dudas más habituales al analizar la
-        rentabilidad de una inversión inmobiliaria en alquiler.
+        Resolvemos las dudas más habituales sobre cómo calcular la rentabilidad
+        de una inversión inmobiliaria en alquiler con nuestra calculadora
+        gratuita.
       </Typography>
 
       {faqs.map((item, index) => (

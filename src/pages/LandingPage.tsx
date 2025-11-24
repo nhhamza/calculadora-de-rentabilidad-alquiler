@@ -12,22 +12,19 @@ import SavingsIcon from "@mui/icons-material/Savings";
 import HomeIcon from "@mui/icons-material/Home";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link as RouterLink } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { Layout } from "../layout/Layout";
+import { SEO, structuredDataTemplates } from "../utils/seo";
 
 export function LandingPage() {
   return (
     <Layout>
-      <Helmet>
-        <title>
-          Calculadora de rentabilidad de un inmueble | Inversión inmobiliaria en
-          España
-        </title>
-        <meta
-          name="description"
-          content="Calcula la rentabilidad de tu inmueble en alquiler en España teniendo en cuenta hipoteca, gastos e ingresos. Simulador inmobiliario sencillo y visual."
-        />
-      </Helmet>
+      <SEO
+        title="Calculadora de Rentabilidad Alquiler Gratuita"
+        description="Calculadora de rentabilidad de alquiler gratuita para inversiones inmobiliarias en España. Analiza tu inmueble en alquiler con hipoteca, gastos, impuestos y obtén ROI, TIR y cash flow al instante. 100% gratis."
+        keywords="calculadora rentabilidad alquiler gratuita, calculadora rentabilidad inmueble, calculadora alquiler gratis, ROI inmobiliario, rentabilidad inversión inmobiliaria España, calculadora hipoteca alquiler, cash flow inmuebles, TIR inmobiliaria, simulador inversión inmobiliaria"
+        canonical="https://calculadora-de-rentabilidad.vercel.app/"
+        structuredData={structuredDataTemplates.website}
+      />
 
       <Grid container spacing={4} alignItems="center">
         <Grid item xs={12} md={6}>
@@ -36,12 +33,13 @@ export function LandingPage() {
               variant="h1"
               sx={{ fontSize: { xs: "2rem", md: "2.6rem" } }}
             >
-              Calculadora de rentabilidad de un inmueble
+              Calculadora de Rentabilidad Alquiler Gratuita
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Evalúa en minutos si un inmueble en alquiler es una buena
-              inversión. Ten en cuenta la hipoteca, los gastos y la renta
-              mensual de forma sencilla.
+              Calcula gratis la rentabilidad de tu inversión inmobiliaria en
+              alquiler. Evalúa en minutos si un inmueble es una buena inversión
+              teniendo en cuenta hipoteca, gastos, impuestos y renta mensual.
+              Herramienta 100% gratuita para España.
             </Typography>
             <Button
               component={RouterLink}
@@ -51,7 +49,7 @@ export function LandingPage() {
               endIcon={<ArrowForwardIcon />}
               sx={{ alignSelf: { xs: "stretch", sm: "flex-start" }, mt: 1 }}
             >
-              Empezar a calcular
+              Calcular gratis ahora
             </Button>
           </Stack>
         </Grid>
@@ -107,8 +105,22 @@ export function LandingPage() {
       </Grid>
 
       <Box sx={{ mt: 6 }}>
+        <Typography variant="h2" sx={{ fontSize: "1.75rem", mb: 2 }}>
+          ¿Por qué usar nuestra calculadora de rentabilidad gratuita?
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+          Nuestra herramienta gratuita de análisis de inversiones inmobiliarias
+          te permite calcular la rentabilidad real de un inmueble en alquiler en
+          España. A diferencia de otras calculadoras, incluimos todos los
+          gastos: hipoteca, impuestos (IBI, ITP), comunidad, seguros,
+          mantenimiento y vacacional. Obtén métricas clave como ROI, TIR, cash
+          flow y ratio de capitalización al instante.
+        </Typography>
+      </Box>
+
+      <Box sx={{ mt: 6 }}>
         <Typography variant="h5" gutterBottom>
-          ¿Cómo funciona?
+          ¿Cómo funciona la calculadora?
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>

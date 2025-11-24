@@ -1,9 +1,9 @@
 import { Grid, Typography } from "@mui/material";
-import { Helmet } from "react-helmet-async";
 import { Layout } from "../layout/Layout";
 import { DealInputsForm } from "../components/calculator/DealInputsForm";
 import { DealResultsPanel } from "../components/calculator/DealResultsPanel";
 import { useDealAnalyzer } from "../components/calculator/useDealAnalyzer";
+import { SEO, structuredDataTemplates } from "../utils/seo";
 
 export function DealAnalyzerPage() {
   const {
@@ -17,23 +17,21 @@ export function DealAnalyzerPage() {
 
   return (
     <Layout>
-      <Helmet>
-        <title>
-          Calcular rentabilidad alquiler inmueble | Simulador inmobiliario
-          España
-        </title>
-        <meta
-          name="description"
-          content="Calcula la rentabilidad de un inmueble en alquiler introduciendo precio, hipoteca, gastos e ingresos. Obtén cash flow, Cap Rate, Cash-on-Cash, DSCR y más."
-        />
-      </Helmet>
+      <SEO
+        title="Calculadora Rentabilidad Alquiler Inmueble Gratis"
+        description="Calculadora gratuita de rentabilidad de inmuebles en alquiler. Introduce precio, hipoteca, gastos e ingresos y obtén al instante: cash flow, ROI, TIR, Cap Rate, Cash-on-Cash y DSCR. Herramienta online para inversores inmobiliarios en España."
+        keywords="calculadora rentabilidad alquiler, simulador inversión inmobiliaria, calcular ROI inmueble, cash flow alquiler, calculadora hipoteca inversión, TIR inmobiliaria, cap rate España, cash on cash return, DSCR calculadora"
+        canonical="https://calculadora-de-rentabilidad.vercel.app/calculadora-rentabilidad-inmueble"
+        structuredData={structuredDataTemplates.calculator}
+      />
 
-      <Typography variant="h4" gutterBottom>
-        Calculadora de rentabilidad
+      <Typography variant="h1" sx={{ fontSize: "1.75rem" }} gutterBottom>
+        Calculadora de Rentabilidad de Alquiler Gratuita
       </Typography>
       <Typography variant="body1" color="text.secondary" paragraph>
-        Introduce los datos de tu inversión para estimar el flujo de caja y los
-        principales ratios de rentabilidad. Los resultados son orientativos.
+        Introduce los datos de tu inversión inmobiliaria para calcular gratis el
+        flujo de caja y los principales ratios de rentabilidad (ROI, TIR, Cap
+        Rate, Cash-on-Cash). Los resultados son orientativos.
       </Typography>
 
       <Grid container spacing={3}>
